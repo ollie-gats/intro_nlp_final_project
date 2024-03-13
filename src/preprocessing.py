@@ -172,7 +172,7 @@ def preprocess_job_titles(df):
     # Removes the characters such as (f/m/d) from the job titles
     df['cleaned_job_title'] = df['cleaned_job_title'].apply(
         lambda title: ' '.join(
-            word if (len(word) >= 2 or word.lower() in ["ai", "ml", "it", "db", "qa", "bi", "r"]) else ''
+            word if (len(word) >= 2 or word.lower() in ["ai", "ml", "it", "db", "qa", "bi", "r", "c"]) else ''
             for word in title.split()
         )
     )
