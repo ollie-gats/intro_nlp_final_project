@@ -239,11 +239,13 @@ def preprocess_job_titles(df):
     return df
     
 
+
 class Metrics:
     def __init__(self):
         self.results = {}
+        self.colors = {}
 
-    def run(self, y_true, y_pred, method_name, average='macro'):
+    def run(self, y_true, y_pred, method_name, color='blue', average='macro'):
         # Calculate metrics
         accuracy = accuracy_score(y_true, y_pred)
         precision = precision_score(y_true, y_pred, average=average)
@@ -257,16 +259,18 @@ class Metrics:
             'recall': recall,
             'f1': f1,
         }
+        self.colors[method_name] = color
 
     def plot(self):
         # Create subplots
-        fig, axs = plt.subplots(2, 2, figsize=(15, 10))
+        fig, axs = plt.subplots(2, 2, figsize=(20, 10))
 
         # Plot each metric
         for i, metric in enumerate(['accuracy', 'precision', 'recall', 'f1']):
             ax = axs[i//2, i%2]
             values = [res[metric] * 100 for res in self.results.values()]
-            ax.bar(self.results.keys(), values)
+            colors = [self.colors[method] for method in self.results.keys()]
+            ax.bar(self.results.keys(), values, color=colors)
             ax.set_title(metric)
             ax.set_ylim(0, 100)
 
