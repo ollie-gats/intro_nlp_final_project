@@ -280,7 +280,7 @@ class Metrics:
             
             # Adjust layout
             ax.set_xticklabels(self.results.keys(), rotation=45)
-                
+   
         plt.tight_layout()
         plt.show()
 
